@@ -1,0 +1,19 @@
+body {
+    background-color: black;
+    color: white;
+}
+
+h3 {
+    margin: 10px;
+    text-align: center;
+}
+
+.search-input {
+    margin: 100px;
+}
+
+.jumbotron-class {
+    width: 70%;
+    margin-left: 100px;
+    background-color: #f6e5f5;
+}
