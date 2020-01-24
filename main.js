@@ -7,10 +7,12 @@ var submitBtn = document.querySelectorAll('input')[1];
 
 var section = document.querySelector('section');
 var movieDisplay = document.querySelector(".lead");
+var jumboDiv = document.querySelector('.jumbotron-class');
+var containerDiv = document.querySelector('.container-class');
 
-if (searchBtn.value === '') {
-    document.querySelector('.jumbotron-class').style.display = "none";
-}
+// if (searchBtn.value === '') {
+//     document.querySelector('.jumbotron-class').style.display = "none";
+// }
 
 submitBtn.addEventListener('click', submitHandler);
 
@@ -36,26 +38,39 @@ function fetchResults(e) {
 
 
 function displayMovies(data) {
-    // var movieDetails = data;
-    // for(var i=0;i<movieDetails.length;i++) {
 
-    // }
-    // var movieName = document.querySelector('.display-4');
-    // var headLine = document.createElement('h3');
-    // var some = document.querySelector('.container-class');
-    // var summary = document.querySelector('.summary');
-    // var releasedDate = document.createElement('h4');
-    // var artcileLink = document.createElement('a');
-    // var movieImage = document.createElement('img');
-    // movieName.innerText = movieDetails.results[0].display_title;
-    // headLine.innerText = movieDetails.results[0].headline;
-    // summary.innerText = movieDetails.results[0].summary_short;
-    // artcileLink.href = movieDetails.results[0].link.url;
-    // artcileLink.innerText = movieDetails.results[0].link.suggested_link_text;
-    // movieImage.src = movieDetails.results[0].multimedia.src;
-    // some.appendChild(headLine);
-    // // body.appendChild(summary);
-    // body.appendChild(artcileLink);
-    // body.appendChild(movieImage);
-    // window.console.log("movieDetails", movieDetails)
+    var movieDetails = data.results;
+    if (movieDetails == 0) {
+        var paraError = document.createElement('p');
+        paraError.textContent = "No results found!";
+        paraError.classList.add('jumbotron-class')
+        section.appendChild(paraError);
+    } else {
+        for (var i = 0; i < movieDetails.length; i++) {
+            var movie_title = document.createElement('h1');
+            var movie_headline = document.createElement('h2');
+            var movie_summary = document.createElement('h4');
+            var movie_link = document.createElement('link');
+            var movie_image = document.createElement('img');
+            var clearfix = document.createElement('div');
+
+            movie_title.innerText = movieDetails[i].display_title;
+            movie_headline.innerText = movieDetails[i].headline;
+            movie_summary.innerText = movieDetails[i].summary_short;
+            movie_link.href = movieDetails[i].link.url;
+            movie_link.innerText = movieDetails[i].link.suggested_link_text;
+            movie_image.src = movieDetails[i].multimedia.src;
+
+            clearfix.setAttribute('class', 'clearfix');
+
+            containerDiv.appendChild(movie_title);
+            containerDiv.appendChild(movie_headline);
+            containerDiv.appendChild(movie_summary);
+            containerDiv.appendChild(movie_image);
+            containerDiv.appendChild(movie_link);
+            var hr = document.createElement('hr');
+            hr.classList.add('.hr-line')
+            containerDiv.appendChild(hr);
+        }
+    }
 }

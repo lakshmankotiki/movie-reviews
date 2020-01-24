@@ -14,3 +14,9 @@ h3 {
     margin-left: 100px;
     background-color: #f6e5f5;
 }
+
+.hr-line {
+    /* line-height: 10px; */
+    height: 12px;
+    background-color: black;
+}
