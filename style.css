@@ -1,4 +1,6 @@
-body {}
+body {
+    font-family: 'Contrail One', cursive;
+}
 
 h3 {
     margin: 10px;
@@ -12,11 +14,16 @@ h3 {
 .jumbotron-class {
     width: 70%;
     margin-left: 100px;
+    box-shadow: 10px 10px 5px grey;
     background-color: #f6e5f5;
 }
 
 .hr-line {
-    /* line-height: 10px; */
     height: 12px;
     background-color: black;
+}
+
+a {
+    position: relative;
+    left: 10px;
 }
