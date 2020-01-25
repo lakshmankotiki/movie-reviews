@@ -17,16 +17,20 @@ var containerDiv = document.querySelector('.container-class');
 var searchBtn = document.querySelectorAll('input')[0];
 var submitBtn = document.querySelectorAll('input')[1];
 
-// if (searchBtn.value === '') {
-//     jumboDiv.style.display = "none";
-// }
+if (searchBtn.value === '') {
+    jumboDiv.style.display = "none";
+}
 
 //click event and handler when user click on submit button
 submitBtn.addEventListener('click', submitHandler);
 
 function submitHandler(e) {
-    document.querySelector('.jumbotron-class').style.display = "block";
-    fetchResults(e);
+    if (searchBtn.value === '') {
+        jumboDiv.style.display = "none";
+    } else {
+        // document.querySelector('.jumbotron-class').style.display = "block";
+        fetchResults(e);
+    }
 }
 
 //fetching results from API
@@ -51,6 +55,12 @@ function fetchResults(e) {
 //displaying movies on body using DOM
 function displayMovies(data) {
 
+    //removing extra element if available
+    if(document.querySelector('p')) {
+        document.querySelector('p').remove();
+    }
+
+    //checking and removing if already any childs containers available
     while (containerDiv.firstChild) {
         containerDiv.removeChild(containerDiv.firstChild);
     }
@@ -66,18 +76,24 @@ function displayMovies(data) {
         //looping if we get mopre than one results from the API
         for (var i = 0; i < movieDetails.length; i++) {
             var movie_title = document.createElement('h1');
-            var movie_headline = document.createElement('h2');
-            var movie_summary = document.createElement('h4');
+            var movie_headline = document.createElement('h3');
+            var movie_summary = document.createElement('p');
             var movie_link = document.createElement('a');
             var movie_image = document.createElement('img');
 
             //assigning values to the DOM from results
-            movie_title.innerText = movieDetails[i].display_title;
+            movie_title.innerText = "Movie Name is: " + "'" +movieDetails[i].display_title+ "'";
             movie_headline.innerText = movieDetails[i].headline;
             movie_summary.innerText = movieDetails[i].summary_short;
-            movie_link.href = movieDetails[i].link.url;
-            movie_link.textContent = movieDetails[i].link.suggested_link_text;
-            movie_image.src = movieDetails[i].multimedia.src;
+            //checking the review link availble or not
+            if(movieDetails[i].link.url) {
+                movie_link.href = movieDetails[i].link.url;
+                movie_link.textContent = movieDetails[i].link.suggested_link_text;
+            }
+            //checking image links available or not
+            if(movieDetails[i].multimedia) {
+                movie_image.src = movieDetails[i].multimedia.src;
+            }
 
             //applying styles for DOM
             movie_link.style.left = "10px";
@@ -90,17 +106,17 @@ function displayMovies(data) {
             containerDiv.appendChild(movie_image);
             containerDiv.appendChild(movie_link);
 
+            //if we get more than one results then displaying results in block type
+            document.querySelector('.jumbotron-class').style.display = "block";
+
 
             //adding line for differenciating movies if more than one movie
             var hr = document.createElement('hr');
             hr.classList.add('.hr-line');
             containerDiv.appendChild(hr);
 
+            //applying styles using setAttribute
             hr.setAttribute("height", "20px");
         }
     }
 }
-
-window.onload = function() {
-    jumboDiv.style.display = "none";
-};

@@ -1,10 +1,18 @@
 body {
-    font-family: 'Contrail One', cursive;
+    font-family: 'Signika', sans-serif;
+    background-color: black;
+    color: white;
 }
 
-h3 {
-    margin: 10px;
+.title-class {
     text-align: center;
+    margin-top: 30px;
+    font-family: 'Ruslan Display', cursive;
+    color: #ea9abb;
+}
+
+h1 {
+    color: black;
 }
 
 .search-input {
@@ -15,7 +23,7 @@ h3 {
     width: 70%;
     margin-left: 100px;
     box-shadow: 10px 10px 5px grey;
-    background-color: #f6e5f5;
+    background-color: #ec7373;
 }
 
 .hr-line {
@@ -26,4 +34,18 @@ h3 {
 a {
     position: relative;
     left: 10px;
+}
+
+footer {
+    margin-left: 100px;
+    width: 75%;
+    font-size: large;
+    letter-spacing: 2px;
+    font-family: 'Great Vibes', cursive;
+    text-align: center;
+}
+
+/* highlighting the name */
+b {
+    letter-spacing: 2px;
 }
